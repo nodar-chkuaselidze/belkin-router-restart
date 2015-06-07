@@ -12,16 +12,16 @@ import (
 )
 
 func main() {
-	var password string
+	routerIP := "192.168.1.1" //static for now
 
 	log.Println("Get password")
 
 	fmt.Print("Enter router password: ")
-	password = base64.StdEncoding.EncodeToString(gopass.GetPasswd())
+	password := base64.StdEncoding.EncodeToString(gopass.GetPasswd())
 
 	log.Println("Started auth..")
 
-	_, err := http.PostForm("http://192.168.1.1/login.cgi", url.Values{
+	_, err := http.PostForm("http://"+routerIP+"/login.cgi", url.Values{
 		"page":       {""},
 		"logout":     {""},
 		"action":     {"submit"},
@@ -31,12 +31,12 @@ func main() {
 	})
 
 	if err != nil {
-		fmt.Errorf("Happend fucking error %s", err.Error())
+		fmt.Println("Happend fucking error: ", err)
 		return
 	}
 
 	log.Println("Now trying to restart...")
-	restartPage, err := http.PostForm("http://192.168.1.1/ut_reset.cgi", url.Values{
+	restartPage, err := http.PostForm("http://"+routerIP+"/ut_reset.cgi", url.Values{
 		"page":    {""},
 		"action":  {"Reboot"},
 		"logout":  {""},
@@ -45,7 +45,7 @@ func main() {
 	})
 
 	if err != nil {
-		fmt.Errorf("Happend error.. %s", err.Error())
+		fmt.Println("Happend error.. %s", err)
 		return
 	}
 
