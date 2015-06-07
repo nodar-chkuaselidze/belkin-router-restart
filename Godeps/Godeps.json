@@ -1,0 +1,14 @@
+{
+	"ImportPath": "github.com/nodar-chkuaselidze/restart-router",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/howeyc/gopass",
+			"Rev": "2c70fa70727c953c51695f800f25d6b44abb368e"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh/terminal",
+			"Rev": "c10c31b5e94b6f7a0283272dc2bb27163dcea24b"
+		}
+	]
+}
